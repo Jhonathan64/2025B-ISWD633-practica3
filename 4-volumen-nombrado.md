@@ -9,6 +9,7 @@ docker volume create <nombre volumen>
 
 ### Crear el volumen nombrado: vol-postgres
 # COMPLETAR CON EL COMANDO
+<img width="581" height="63" alt="image" src="https://github.com/user-attachments/assets/016de106-bb18-4c6a-9c06-e2dcf4538630" />
 
 ## MOUNTPOINT
 Un mountpoint se refiere al lugar en el sistema de archivos donde un dispositivo de almacenamiento se une (o monta) al sistema de archivos. Es el punto donde los archivos y directorios almacenados en ese dispositivo de almacenamiento son accesibles para el sistema operativo y las aplicaciones.
@@ -40,6 +41,8 @@ docker run -d --name <nombre contenedor> --mount type=volume,src=<nombre >,dst=<
 
 ### Crear la red net-drupal de tipo bridge
 # COMPLETAR CON EL COMANDO
+<img width="816" height="75" alt="image" src="https://github.com/user-attachments/assets/d11404b4-7e90-4d59-96b6-17a73177fabd" />
+
 
 ### Crear un servidor postgres vinculado a la red net-drupal, completar la ruta del contenedor
 ```
@@ -56,6 +59,7 @@ docker run -d --name client-postgres --publish published=9500,target=80 -e PGADM
 
 ### Crear los volúmenes necesarios para drupal, esto se puede encontrar en la documentación
 ### COMPLETAR CON LOS COMANDOS
+<img width="741" height="201" alt="image" src="https://github.com/user-attachments/assets/5ee31541-5d09-4b48-a8e1-2ac1480cd2c0" />
 
 ### Crear el contenedor server-drupal vinculado a la red, usar la imagen drupal, y vincularlo a los volúmenes nombrados
 ```
@@ -64,6 +68,7 @@ docker run -d --name server-drupal --publish published=9700,target=80 -v <nombre
 
 ### Ingrese al server-drupal y siga el paso a paso para la instalación.
 # COMPLETAR CON UNA CAPTURA DE PANTALLA DEL PASO 4
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/cc4c712d-869f-442a-82d6-ee6915d926ba" />
 
 _La instalación puede tomar varios minutos, mientras espera realice un diagrama de los contenedores que ha creado en este apartado._
 
@@ -76,3 +81,11 @@ docker volume rm <nombre volumen>
 **Considerar**
 Datos Persistentes: Asegúrate de que el volumen no contiene datos críticos antes de eliminarlo, ya que esta operación no se puede deshacer.
 Contenedores Activos: No puedes eliminar un volumen que está actualmente en uso por un contenedor activo. Debes detener y/o eliminar el contenedor primero.
+
+Al volver a crear el contenedor, Drupal se inicia inmediatamente en el sitio web que ya configuraste. No se requiere la pantalla de instalación inicial, ya que:
+
+Los datos de la base de datos (tablas, usuarios, contenido) fueron persistentes en el volumen nombrado vol-postgres.
+
+Los archivos del sitio (módulos, temas, configuraciones) fueron persistentes en los volúmenes nombrados vol-drupal-*.
+
+La persistencia del sitio web se mantiene sin importar cuántas veces se elimine y se cree el contenedor.
